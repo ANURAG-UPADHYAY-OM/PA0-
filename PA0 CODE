@@ -1,0 +1,103 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <title>Bootstrap Example</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src="app.css.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </head>
+<body>
+  <p style="font-size:150%;">Write something in the text field to trigger a function.</p>
+<!--THE ENCRYPTION OF THE TEXT-->
+<h3>ENCRYPTION OF THE TEXT</h3>
+<p>The count difference with which it must be encrypted</p>
+<input type="number" id="count">
+<br>
+<!--INPUT THE TEXT TO BE ENCRYPTED-->
+<p>Write the string to be encrypted </p>
+<input type="text" id="myInput" oninput="encipher()">
+<!--THE ENCRYPTED  RESULT-->
+<p>The encrypted string is given as below:  </p>
+<p id="encrypted_str"></p>
+<hr>
+<hr>
+<!--THE DECRYPTION OF THE TEXT-->
+<h3>DECRYPTION OF THE TEXT</h3>
+<p>The count difference with which it must be decrypted</p>
+<input type="number" id="count1">
+<br>
+<!--INPUT THE TEXT TO BE DECRYPTED-->
+<p>Write the string to be decrypted </p>
+<input type="text" id="myInput1" oninput="decipher()">
+<!--THE ENCRYPTED  RESULT-->
+<p>The decrypted string is given as below:  </p>
+
+<script>
+  //THE FUNCTION OF ENCRYPTION  IS AS FOLLOWS 
+function encipher() 
+{
+  var ct= document.getElementById("count").value;
+  var str = document.getElementById("myInput").value;
+  let enc_str ="";
+  for (let i = 0; i < str.length; i++) 
+  {
+    if (str[i] >= "a" && str[i] <= "z")
+   {
+     var num=str.charCodeAt(i);
+    let ch = ((str.charCodeAt(i) - 97+ parseInt(ct))%26)+97;
+        enc_str += String.fromCharCode(ch);
+  }
+ else if (str[i] >= "A" && str[i] <= "Z")
+   {
+     var num=str.charCodeAt(i);
+    let ch = ((str.charCodeAt(i) - 65+ parseInt(ct))%26)+65;
+        enc_str += String.fromCharCode(ch);
+  }
+  else 
+  if (str[i] >= "0" && str[i] <= "9")
+   {
+     var num=str.charCodeAt(i);
+    let ch = ((str.charCodeAt(i) - 48+ parseInt(ct))%10)+48;
+        enc_str += String.fromCharCode(ch);
+  }
+}
+    document.getElementById("encrypted_str").innerHTML = enc_str;
+}
+
+
+//THE FUNCTION OF DECRYPTION  IS AS FOLLOWS 
+function decipher() 
+{
+  var ct= document.getElementById("count1").value;
+  var str = document.getElementById("myInput1").value;
+  let dec_str ="";
+  for (let i = 0; i < str.length; i++) 
+  {
+    if (str[i] >= "a" && str[i] <= "z")
+   {
+     var num=str.charCodeAt(i);
+    let ch = ((str.charCodeAt(i) - 97+26- parseInt(ct))%26)+97;
+        dec_str += String.fromCharCode(ch);
+  }
+ else if (str[i] >= "A" && str[i] <= "Z")
+   {
+     var num=str.charCodeAt(i);
+    let ch = ((str.charCodeAt(i) - 65+26- parseInt(ct))%26)+65;
+        dec_str += String.fromCharCode(ch);
+  }
+  else 
+  if (str[i] >= "0" && str[i] <= "9")
+   {
+     var num=str.charCodeAt(i);
+    let ch = ((str.charCodeAt(i) - 48+10- parseInt(ct))%10)+48;
+        dec_str += String.fromCharCode(ch);
+  }
+}
+    document.getElementById("decrypted_str").innerHTML = dec_str;
+}
+</script>
+</body>
+</html>
